@@ -40,8 +40,16 @@ const createBar = async (req, res) => {
     });
 };
 
+const deleteBar = async (req, res) => {
+    const id = req.params.id_bar;
+    const response = await pool.query('DELETE FROM bars WHERE id_bar = $1', [id]);
+    console.log(response);
+    res.json(`Bar ${id} deleted successfully.`);
+};
+
 module.exports = {
     getBars,
     getBarById,
-    createBar
+    createBar,
+    deleteBar
 }
