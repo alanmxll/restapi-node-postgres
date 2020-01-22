@@ -14,6 +14,12 @@ const getBars = async (req, res) => {
     res.status(200).json(response.rows);
 };
 
+const getBarById = async (req, res) => {
+    const id = req.params.id_bar;
+    const response = await pool.query('SELECT * FROM bars WHERE id_bar = $1', [id]);
+    res.json(response.rows);
+};
+
 const createBar = async (req, res) => {
     const { weight_bar,
             weighing_date,
@@ -36,5 +42,6 @@ const createBar = async (req, res) => {
 
 module.exports = {
     getBars,
+    getBarById,
     createBar
 }
